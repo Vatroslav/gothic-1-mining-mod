@@ -1,12 +1,12 @@
 # Gothic 1 Remake: Whole Vein Mining
 
-A small script-only mod for Gothic 1 Remake: one dig empties the whole ore vein, and all the ore that was left in it goes to your inventory. The dig animation plays once, as usual.
+A small script-only mod for Gothic 1 Remake: one dig moves all the ore left in a vein to your inventory, except the last piece. The next dig gives the last piece, so a vein takes two digs (15 ore: 14, then 1).
 
 Turn it off in `Settings > Game > Whole Vein Mining`.
 
 ## How it works
 
-The mod replaces the hero's mining ability with a subclass. When a dig starts, it moves all ore but one piece from the vein to the hero. The game's own dig then takes the last piece, so the vein empties the way it normally does. If the game's dig ever gives more than what was left, the extra is taken back.
+The mod replaces the hero's mining ability with a subclass. When a dig starts, it moves all ore but one piece from the vein to the hero. The game's own dig gives nothing more in that dig; the last piece comes with the next dig, as in the unmodded game. If the game's dig ever gives more than what left the vein, the extra is taken back.
 
 ## Install
 

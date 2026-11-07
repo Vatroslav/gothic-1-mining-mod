@@ -1,9 +1,9 @@
-// Whole Vein Mining: one dig empties the whole ore vein.
+// Whole Vein Mining: one dig takes all ore but the last piece.
 //
 // The game gives a few pieces per dig (UMiningConfig). This mod replaces the
 // hero's mining ability with a subclass. When a dig starts, it moves all ore but
-// one piece from the vein to the hero. The game's dig then takes the last piece,
-// so the vein empties the usual way.
+// one piece from the vein to the hero. In the game (2026-11-07) that dig gives
+// nothing more, and the next dig gives the last piece.
 //
 // The mining ability is native, so only the standard GAS events are available:
 // ActivateAbility (runs only if the native code calls its parent) and
@@ -20,7 +20,7 @@ class UWholeVeinMiningSettings : UGothicModExt_UserSettings
     FModUserSettingsBool Enabled = FModUserSettingsBool(
         Value = true,
         DefaultValue = true,
-        DisplayText = FText::FromString("One dig empties the whole vein"));
+        DisplayText = FText::FromString("One dig takes all ore but the last piece"));
 }
 
 // Swaps the hero's mining ability for the one below.

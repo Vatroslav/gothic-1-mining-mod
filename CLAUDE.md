@@ -9,6 +9,6 @@ Script-only ModKit mod. `WholeVeinMining/` is the mod package; only that folder 
 - Writing outside `~/github` needs Vatra's explicit yes each time. This includes copying to `G1R\Mods`, launch options, `Mods.ini` and other mods in Vortex.
 - Don't publish the mod to Nexus or Steam Workshop.
 - Only Vatra can confirm the mod works, by seeing it in his game.
-- Scope is one dig empties the vein, with an on/off switch. No speed, yield or other changes unless Vatra asks.
+- Scope is one dig takes all ore but the last piece, with an on/off switch. The last piece needs a second dig; Vatra accepted that on 2026-11-07. No speed, yield or other changes unless Vatra asks.
 - Other mods' code is a reference only: don't copy it without checking its license.
 - Game behavior claims come from the shipped scripts (`G1R/Script`) or the ModKit reference, not from memory. Mining itself is native code; scripts only see `UMiningConfig` values and the vein's container.
