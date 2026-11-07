@@ -40,7 +40,7 @@ class UWholeVeinMining_Ability : UGameplayAbilityMining
                                       FGameplayEventData TriggerEventData)
     {
         ClearTracking();
-        if (!UWholeVeinMiningSettings.DefaultObject.Enabled.Value)
+        if (!UWholeVeinMiningSettings.DefaultObject.Enabled.bValue)
             return;
 
         AGothicCharacter Hero = Cast<AGothicCharacter>(GetAvatarActorFromActorInfo());
