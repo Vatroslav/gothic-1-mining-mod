@@ -1,0 +1,14 @@
+{
+  "name": "WholeVeinMining",
+  "title": "Whole Vein Mining",
+  "author": "Vatroslav",
+  "projectWebsiteURL": "https://github.com/Vatroslav/gothic-1-mining-mod",
+  "description": "One dig empties the whole ore vein: all the ore left in the vein goes to your inventory.\n\nTurn it off in Settings > Game > Whole Vein Mining.",
+  "modVersion": "0.1.0",
+  "scriptPreprocessorDefines": [],
+  "tags": [
+    "Enhancement"
+  ],
+  "loadOrder": "Normal",
+  "dependencies": []
+}
