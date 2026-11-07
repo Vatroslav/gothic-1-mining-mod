@@ -4,6 +4,11 @@
 // hero's mining ability with a subclass. When a dig starts, it moves all ore but
 // one piece from the vein to the hero. The game's dig then takes the last piece,
 // so the vein empties the usual way.
+//
+// The mining ability is native, so only the standard GAS events are available:
+// ActivateAbility (runs only if the native code calls its parent) and
+// OnEndAbility. If the start event does not run, the rest of the vein is moved
+// when the dig ends instead.
 
 // Settings > Game > Whole Vein Mining.
 UCLASS(Config=GameUserSettings)
@@ -36,50 +41,45 @@ class UWholeVeinMining_Ability : UGameplayAbilityMining
     int VeinOreAtStart = -1;
 
     UFUNCTION(BlueprintOverride)
-    void OnActivateAbility_Scriptable(FGameplayAbilityActorInfo GAActorInfo,
-                                      FGameplayEventData TriggerEventData)
+    void ActivateAbility()
     {
         ClearTracking();
         if (!UWholeVeinMiningSettings.DefaultObject.Enabled.bValue)
             return;
 
         AGothicCharacter Hero = Cast<AGothicCharacter>(GetAvatarActorFromActorInfo());
-        if (!IsValid(Hero))
+        AActor FoundVein = FindVein();
+        if (!IsValid(Hero) || !IsValid(FoundVein))
             return;
 
+        Vein = FoundVein;
         HeroOreAtStart = Hero.Inventory.CountItemsOfClass(UItMi_Orenugget::StaticClass());
-
-        Vein = FindVein();
-        if (!IsValid(Vein))
-            return;
-
         VeinOreAtStart = OreInVein(Vein);
         MoveOreToHero(Vein, Hero, VeinOreAtStart - 1);
     }
 
     UFUNCTION(BlueprintOverride)
-    void OnEndAbility_Scriptable(FGameplayAbilityActorInfo GameplayAbilityActorInfo, bool WasCancelled)
+    void OnEndAbility(bool bWasCancelled)
     {
         AGothicCharacter Hero = Cast<AGothicCharacter>(GetAvatarActorFromActorInfo());
-        if (HeroOreAtStart >= 0 && IsValid(Hero))
+        if (IsValid(Hero) && UWholeVeinMiningSettings.DefaultObject.Enabled.bValue)
         {
-            int Gained = Hero.Inventory.CountItemsOfClass(UItMi_Orenugget::StaticClass()) - HeroOreAtStart;
-
             if (VeinOreAtStart >= 0 && IsValid(Vein))
             {
                 // The hero should end up with exactly what left the vein. If the
                 // game's dig gave more than the one piece that was left, take
                 // the extra back.
+                int Gained = Hero.Inventory.CountItemsOfClass(UItMi_Orenugget::StaticClass()) - HeroOreAtStart;
                 int Taken = VeinOreAtStart - OreInVein(Vein);
                 if (Gained > Taken)
                 {
                     int Removed = Hero.Inventory.RemoveItemOfClass(UItMi_Orenugget::StaticClass(), Gained - Taken);
                 }
             }
-            else if (Gained > 0)
+            else
             {
-                // The vein was not known when the dig started. The dig did give
-                // ore, so move the rest of the vein now.
+                // Nothing was moved when the dig started, so move the rest of
+                // the vein now.
                 AActor LateVein = FindVein();
                 if (IsValid(LateVein))
                     MoveOreToHero(LateVein, Hero, OreInVein(LateVein));
