@@ -12,3 +12,7 @@ Script-only ModKit mod. `WholeVeinMining/` is the mod package; only that folder 
 - Scope is one dig takes all ore but the last piece, with an on/off switch. The last piece needs a second dig; Vatra accepted that on 2026-11-07. No speed, yield or other changes unless Vatra asks.
 - Other mods' code is a reference only: don't copy it without checking its license.
 - Game behavior claims come from the shipped scripts (`G1R/Script`) or the ModKit reference, not from memory. Mining itself is native code; scripts only see `UMiningConfig` values and the vein's container.
+
+## Shared how-to
+
+How Gothic 1 Remake mods are built here (ModKit, hooks, settings, GAS patterns, checks, install), in Croatian: `~/github/game-development/knowledge-base/gothic-1-remake-modovi.md`. Read it before changing this mod or starting a new one, and add new lessons there, not here.
