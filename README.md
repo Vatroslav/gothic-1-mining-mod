@@ -15,4 +15,4 @@ The mod replaces the hero's mining ability with a subclass. When a dig starts, i
 
 No UE4SS or other loader is needed. Loading an older save shows the game's different-modlist warning, as with any mod.
 
-Unofficial fan mod, not affiliated with the game's developers or publisher.
+This is an unofficial modification. It is not made, endorsed or supported by THQ Nordic.
